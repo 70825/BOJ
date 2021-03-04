@@ -1,0 +1,1 @@
+for i in range(int(input())):a=input().split();b=a[0];c=a[1];print(len(b)-(len(c)-1)*b.count(c))

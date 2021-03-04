@@ -1,0 +1,11 @@
+for i in range(int(input())):
+    A,B=input().split(); B=int(B);print(A,end=" ")
+    if 97<=B<=100:print('A+')
+    elif 90<=B<=96:print('A')
+    elif 87<=B<=89:print('B+')
+    elif 80<=B<=86:print('B')
+    elif 77<=B<=79:print('C+')
+    elif 70<=B<=76:print('C')
+    elif 67<=B<=69:print('D+')
+    elif 60<=B<=66:print('D')
+    else:print('F')
