@@ -1,0 +1,1 @@
+k=int(input())//3-2;print(k*(k+1)//2)

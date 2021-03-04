@@ -1,0 +1,1 @@
+print(int(1/4*int(input())**2))

@@ -1,0 +1,8 @@
+A=input().split()
+B=input().split()
+for i in range(3):A[i]=int(A[i]);B[i]=int(B[i])
+if A[0]==B[0]:print('0')
+elif A[1]>B[1] or (A[1]==B[1] and A[2]>B[2]):print(B[0]-A[0]-1)
+else:print(B[0]-A[0])
+print(int(B[0])-int(A[0])+1)
+print(int(B[0])-int(A[0]))
