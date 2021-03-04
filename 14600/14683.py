@@ -1,0 +1,7 @@
+a,b=map(int,input().split())
+c,d=map(int,input().split())
+k=int(input())
+z=abs(a-c)+abs(b-d)
+if k<z:print('N');exit()
+if z%2==k%2:print('Y')
+else:print('N')

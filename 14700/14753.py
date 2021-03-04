@@ -1,0 +1,6 @@
+N=input()
+D=sorted([*map(int,input().split())],reverse=True)
+A=sorted(D)
+k=max(A[0]*A[1]*A[2],A[0]*A[1]*A[len(A)-1],D[0]*D[1]*D[2])
+p=max(A[0]*A[1],D[0]*D[1])
+print(max(k,p))
