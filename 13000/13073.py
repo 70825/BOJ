@@ -1,0 +1,1 @@
+for i in range(int(input())):N=int(input());k=N*(N+1);print(k//2,k-N,k)
