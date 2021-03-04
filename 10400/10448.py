@@ -1,0 +1,1 @@
+for i in range(int(input())):print([1,0][int(input()) in [4,6,11,20,29]])
