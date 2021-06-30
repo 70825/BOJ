@@ -1,40 +1,41 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <cstring>
 using namespace std;
-#define MAX 1000001
-vector<int> adj[MAX];
-int ans[MAX][2];
+typedef long long ll;
 
-void make_node(int x, int y){
-    adj[x].push_back(y);
-    adj[y].push_back(x);
+const int N = 1e6+1;
+vector<int> adj[N];
+int dp[N][2];
+
+int go(int x, int e, int p) {
+	int& ret = dp[x][e];
+	if (ret != -1) return ret;
+
+	ret = e;
+	for (auto nx : adj[x]) {
+		if (nx == p) continue;
+		if (e) ret += min(go(nx, 1, x), go(nx, 0, x));
+		else ret += go(nx, 1, x);
+	}
+
+	return ret;
 }
 
-int DFS(int x, int ea, int prev){
-    if(ans[x][ea] != -1) return ans[x][ea];
-    if(ea) ans[x][ea] = 1;
-    else ans[x][ea] = 0;
-    for(auto nx: adj[x]){
-        if(nx != prev)
-        {
-            if(ea) ans[x][ea] += min(DFS(nx,0,x),DFS(nx,1,x));
-            else ans[x][ea] += DFS(nx,1,x);
-        }
-    }
-    return ans[x][ea];
-}
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0);
+	memset(dp, -1, sizeof(dp));
 
-int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    int n,u,v;
+	int n, u, v;
+	cin >> n;
+	for (int i = 0; i < n - 1; i++) {
+		cin >> u >> v;
+		adj[u].push_back(v);
+		adj[v].push_back(u);
+	}
 
-    cin >> n;
-    for(int i=1; i<n; i++){
-        cin >> u >> v;
-        make_node(--u,--v);
-    }
+	cout << min(go(1, 0, -1), go(1, 1, -1)) << endl;
 
-    memset(ans,-1,sizeof(ans));
-
-    cout << min(DFS(0,0,-1),DFS(0,1,-1));
+	return 0;
 }
