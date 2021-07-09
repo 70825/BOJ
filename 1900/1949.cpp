@@ -1,42 +1,38 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <cstring>
+#include <vector>
+#include <algorithm>
 using namespace std;
+using ll = long long;
 
-vector<int> val;
-vector<vector<int>> adj;
-int visited[10001];
-long long ans[10001][2];
+const int N = 10001;
+int n, x, y, val[N], dp[N][2];
+vector<int> adj[N];
 
-void connect(int x, int y){
-    adj[x].push_back(y);
-    adj[y].push_back(x);
+int go(int x, int good, int prev) {
+	int& ret = dp[x][good];
+	if (ret != -1) return ret;
+
+	ret = good ? val[x] : 0;
+	for (auto nx : adj[x]) {
+		if (nx != prev) ret += good ? go(nx, 0, x) : max(go(nx, 0, x), go(nx, 1, x));
+	}
+
+	return ret;
 }
 
-long long DFS(int x, int y, int prev){
-    if(ans[x][y] != -1) return ans[x][y];
-    if(y) ans[x][y] = val[x];
-    else ans[x][y] = 0;
-    for(auto nx: adj[x]){
-        if(nx != prev) {
-            if (y) ans[x][1] += DFS(nx, 0, x);
-            else ans[x][0] += max(DFS(nx, 0, x), DFS(nx, 1, x));
-        }
-    }
-    return ans[x][y];
-}
+int main() {
+	ios::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
+	memset(dp, -1, sizeof(dp));
 
-int main(){
-    int n, x, y;
-    cin >> n;
+	cin >> n;
+	for (int i = 0; i < n; i++) cin >> val[i];
+	for (int i = 0; i < n - 1; i++) {
+		cin >> x >> y; x--; y--;
+		adj[x].push_back(y);
+		adj[y].push_back(x);
+	}
 
-    val.resize(n,0);
-    adj.resize(n);
-    memset(ans,-1,sizeof(ans));
-
-    for(int i=0; i<n; i++) cin >> val[i];
-
-    for(int i=1; i<n; i++){
-        cin >> x >> y;
-        connect(--x,--y);
-    }
-    cout << max(DFS(0,0,-1),DFS(0,1,-1));
+	cout << max(go(0, 0, -1), go(0, 1, -1)) << endl;
 }
