@@ -1,5 +1,6 @@
-N=int(input());k=0
-while 1:
-    if k*(k+1)//2>N:print(k-1);break
-    elif k*(k+1)//2==N:print(k);break
-    else:k+=1
+x = int(input()) * 2
+ans = 0
+for i in range(1, 1000000):
+    ans = i * i + i
+    if ans >= x: break
+print([i - 1, i][ans == x])
