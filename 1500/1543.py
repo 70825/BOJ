@@ -1,11 +1,9 @@
-a = input()
-b = input()
+s = input()
+k = input()
+x, y = 0, len(k)
+
 ans = 0
-i = len(b)
-while 1:
-    if i > len(a):break
-    if a[i-len(b):i] == b:
-        ans += 1
-        i += len(b)
-    else: i += 1
+while y <= len(s):
+    if k == s[x:y]:x += len(k);y += len(k);ans += 1
+    else:x += 1;y += 1
 print(ans)

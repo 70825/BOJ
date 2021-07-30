@@ -1,9 +1,6 @@
-N,L=map(int,input().split())
-A=input().split()
-D=[]
-for i in range(N):D.append(int(A[i]))
-D.sort()
-for i in range(N):
-    if D[i]<=L:L+=1
-    else:break
-print(L)
+n, l = map(int, input().split())
+h = sorted([*map(int, input().split())])
+for i in range(n):
+    if l + i < h[i]:
+        print(l + i); exit()
+print(l + n)
