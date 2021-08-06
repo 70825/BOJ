@@ -1,10 +1,13 @@
-from decimal import Decimal
-n,m=map(int,input().split())
-A=input().split()
-for u in range(n):
-    A[u]=Decimal(A[u])
+from heapq import *
+
+n, m = map(int, input().split())
+arr = [*map(int, input().split())]
+q = []
+for i in range(n):
+    heappush(q, arr[i])
 for i in range(m):
-    A.sort()
-    q=A[0]+A[1]
-    A[0]=q;A[1]=q
-print(sum(A))
+    x = heappop(q)
+    y = heappop(q)
+    heappush(q, x+y)
+    heappush(q, x+y)
+print(sum(q))
