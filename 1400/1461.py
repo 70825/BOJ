@@ -1,20 +1,18 @@
 n, m = map(int, input().split())
 arr = sorted([*map(int, input().split())])
-idx = -1
-for i in range(1, n):
-    if arr[i] > 0 > arr[i-1]:
-        idx = i
-        break
-ans = 0
-if idx == -1:
-    if arr[0] > 0: ans = arr[-1] + sum(2 * arr[i] for i in range(n - m - 1, -1, -m))
-    else: ans = arr[0] + sum(2 * arr[i] for i in range(m, n, m))
-    print(abs(ans))
-else:
-    if abs(arr[0]) > arr[-1]:
-        ans = abs(arr[0]) + sum(2 * abs(arr[i]) for i in range(m, idx, m))
-        ans += sum(2 * arr[i] for i in range(n - 1, idx - 1, -m))
-    else:
-        ans = arr[-1] + sum(2 * arr[i] for i in range(n - m - 1, idx - 1, -m))
-        ans += sum(2 * abs(arr[i]) for i in range(0, idx, m))
-    print(ans)
+plus = []
+minus = []
+for i in range(n):
+    if arr[i] > 0: plus.append(arr[i])
+    else: minus.append(arr[i])
+
+plus_val = [plus[i] for i in range(len(plus) - 1, -1, -m)]
+minus_val = [abs(minus[i]) for i in range(0, len(minus), m)]
+
+plus_sum = sum(plus_val)
+minus_sum = sum(minus_val)
+
+if len(plus_val) == 0: print(minus_sum * 2 - minus_val[0])
+elif len(minus_val) == 0: print(plus_sum * 2 - plus_val[0])
+elif plus[-1] > abs(minus[0]): print(2 * (plus_sum + minus_sum) - plus_val[0])
+else: print(2 * (plus_sum + minus_sum) - minus_val[0])
