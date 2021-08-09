@@ -1,9 +1,9 @@
 from heapq import *
-input=__import__('sys').stdin.readline
-n=int(input())
-D=sorted([[*map(int,input().split())] for _ in range(n)])
-Room=[]
-for i in range(n):
-    if len(Room)>0 and Room[0]<=D[i][0]:heappop(Room)
-    heappush(Room,D[i][1])
-print(len(Room))
+input = __import__('sys').stdin.readline
+n = int(input())
+arr = sorted([[*map(int, input().split())] for _ in range(n)])
+hq = []
+for x, y in arr:
+    if hq and hq[0] <= x: heappop(hq)
+    heappush(hq, y)
+print(len(hq))

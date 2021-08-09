@@ -1,5 +1,8 @@
-n=int(input())
-k=int(input())
-D=sorted(set([*map(int,input().split())]))
-length=sorted([D[i]-D[i-1] for i in range(1,len(D))])[::-1]
-print(sum(length)-sum(length[:k-1]))
+n = int(input())
+k = int(input())
+arr = sorted([*map(int, input().split())])
+if k >= n:
+    print(0)
+    exit()
+diff = sorted([arr[i+1]-arr[i] for i in range(n-1)])
+print(sum(diff[:n-k]))
