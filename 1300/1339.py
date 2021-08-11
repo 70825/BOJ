@@ -1,10 +1,8 @@
-Dict={}
-z=9;ans=0
-for i in range(int(input())):
-    k=input()
-    for j in range(len(k)):
-        if k[j] not in Dict:Dict[k[j]]=10**(len(k)-j-1)
-        else:Dict[k[j]]+=10**(len(k)-j-1)
-D=sorted(Dict.values(),reverse=True)
-for i in D:ans+=i*z;z-=1
+n = int(input())
+dfd = __import__('collections').defaultdict(lambda: 0)
+for _ in range(n):
+    s = input()
+    for i in range(len(s)):
+        dfd[s[i]] += (10 ** (len(s) - 1 - i))
+ans = sum(x * (9 - i) for i, x in enumerate(sorted(dfd.values(), reverse=True)))
 print(ans)
