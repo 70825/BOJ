@@ -1,17 +1,18 @@
-D=[]
-A=int(input())
-B=int(input())
-def prime(n):
-    if n<2:return 1
-    if n in (2,3):return 0
-    if n%2 is 0 or n%3 is 0:return 1
-    if n<9:return 0
-    k,l=5,n**0.5
-    while k<=l:
-        if n%k is 0 or n%(k+2) is 0:return 1
-        k+=6
-    return 0
-for i in range(A,B+1):
-    if prime(i)==0:D.append(i)
-if len(D)==0:print(-1)
-else:print(sum(D));print(min(D))
+N = 10001
+prime = [True] * 10001
+prime[1] = False
+for i in range(2, N):
+    if not prime[i]: continue
+    for j in range(i+i, N, i):
+        prime[j] = False
+
+m = int(input())
+n = int(input())
+
+ans = 0
+min_val = float('inf')
+for i in range(m, n + 1):
+    if prime[i]:
+        ans += i
+        min_val = min(min_val, i)
+print([-1, f'{ans}\n{min_val}'][ans != 0])
