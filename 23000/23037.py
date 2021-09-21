@@ -1,0 +1,1 @@
+print(sum(int(x)**5 for x in [*input()]))
