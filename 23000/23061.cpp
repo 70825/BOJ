@@ -20,12 +20,8 @@ int main() {
 	memset(dp, 0, sizeof(dp));
 
 	cin >> n >> m;
-	for (int i = 1; i <= n; i++) {
-		cin >> W[i] >> V[i];
-	}
-	for (int i = 1; i <= m; i++) {
-		cin >> bag[i];
-	}
+	for (int i = 1; i <= n; i++) cin >> W[i] >> V[i];
+	for (int i = 1; i <= m; i++) cin >> bag[i];
 
 	for (int i = 1; i <= n; i++) { 
 		for (int j = 0; j < N - 1; j++) {
@@ -40,7 +36,6 @@ int main() {
 		ll LCM = lcm(bag[ans], bag[i]);
 		ll val1 = dp[n][bag[ans]] * (LCM / bag[ans]);
 		ll val2 = dp[n][bag[i]] * (LCM / bag[i]);
-
 		if (val2 > val1) ans = i;
 	}
 
